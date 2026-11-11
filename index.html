@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NeuroCycle — Blueprint & Walkthrough Ekosistem Skala Luas</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    .font-display { font-family: 'Space Grotesk', sans-serif; }
+    .font-mono { font-family: 'JetBrains Mono', monospace; }
+    .device-shadow {
+      box-shadow: 0 25px 60px -15px rgba(28, 25, 23, 0.25), 0 0 0 1px rgba(0, 0, 0, 0.08);
+    }
+    .badge-pin {
+      box-shadow: 0 0 0 3px #ffffff, 0 4px 10px rgba(0, 0, 0, 0.25);
+    }
+  </style>
+</head>
+<body class="bg-stone-100 text-stone-900 min-h-screen p-3 sm:p-6 pb-20 selection:bg-emerald-500 selection:text-white">
+
+  <!-- TOP APP BAR & SLIDE CONTROLLER -->
+  <header class="max-w-6xl mx-auto mb-6 bg-white rounded-3xl p-4 sm:p-5 border border-stone-200/80 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-4">
+    <div class="flex items-center gap-3">
+      <div class="w-12 h-12 flex items-center justify-center shrink-0">
+        <img src="/logo_NeuroCycle.png" alt="NeuroCycle Logo" onerror="this.src='https://placehold.co/80x80/059669/ffffff?text=NC'" class="w-full h-full object-contain drop-shadow-[0_4px_10px_rgba(0,0,0,0.15)]" />
+      </div>
+      <div>
+        <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 text-[10px] font-black uppercase tracking-wider mb-0.5">
+          <i data-lucide="globe-2" class="w-3 h-3 text-emerald-600"></i> Ekosistem Sirkular Skala Luas (Masyarakat, UMKM, Bank Sampah, Korporasi)
+        </div>
+        <h1 class="text-xl sm:text-2xl font-display font-black text-stone-900 tracking-tight">
+          NeuroCycle <span class="text-stone-400 font-normal text-sm sm:text-base hidden sm:inline">| Blueprint & Panduan 8 Layar Lengkap</span>
+        </h1>
+      </div>
+    </div>
+
+    <!-- Slide Navigation Controllers -->
+    <div class="flex items-center gap-2 self-end md:self-auto">
+      <div class="px-3.5 py-2 bg-stone-50 border border-stone-200 rounded-2xl text-xs font-mono font-bold text-stone-600" id="slide-indicator">
+        Slide 1 / 8
+      </div>
+      <button onclick="prevSlide()" class="px-3.5 py-2 bg-white hover:bg-stone-50 active:scale-95 border border-stone-200 rounded-2xl text-xs font-bold text-stone-700 flex items-center gap-1 transition-all cursor-pointer shadow-xs">
+        <i data-lucide="chevron-left" class="w-4 h-4"></i> Sebelumnya
+      </button>
+      <button onclick="nextSlide()" class="px-4 py-2 bg-stone-900 hover:bg-stone-800 active:scale-95 text-white rounded-2xl text-xs font-bold flex items-center gap-1 transition-all cursor-pointer shadow-xs">
+        Selanjutnya <i data-lucide="chevron-right" class="w-4 h-4"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- QUICK SLIDE JUMPER TABS (8 SLIDES) -->
+  <div class="max-w-6xl mx-auto mb-6 flex gap-1.5 overflow-x-auto pb-1 text-xs font-bold">
+    <button onclick="goToSlide(1)" id="pill-1" class="px-3.5 py-2 rounded-2xl bg-stone-900 text-white shadow-xs cursor-pointer whitespace-nowrap transition-all">
+      1. Beranda Warga
+    </button>
+    <button onclick="goToSlide(2)" id="pill-2" class="px-3.5 py-2 rounded-2xl bg-white text-stone-600 border border-stone-200 hover:bg-stone-50 cursor-pointer whitespace-nowrap transition-all">
+      2. Kamera AI Scanner
+    </button>
+    <button onclick="goToSlide(3)" id="pill-3" class="px-3.5 py-2 rounded-2xl bg-white text-stone-600 border border-stone-200 hover:bg-stone-50 cursor-pointer whitespace-nowrap transition-all">
+      3. Papan Peringkat
+    </button>
+    <button onclick="goToSlide(4)" id="pill-4" class="px-3.5 py-2 rounded-2xl bg-white text-stone-600 border border-stone-200 hover:bg-stone-50 cursor-pointer whitespace-nowrap transition-all">
+      4. Setoran Fisik Mitra
+    </button>
+    <button onclick="goToSlide(5)" id="pill-5" class="px-3.5 py-2 rounded-2xl bg-white text-stone-600 border border-stone-200 hover:bg-stone-50 cursor-pointer whitespace-nowrap transition-all">
+      5. Voucer Belanja UMKM
+    </button>
+    <button onclick="goToSlide(6)" id="pill-6" class="px-3.5 py-2 rounded-2xl bg-white text-stone-600 border border-stone-200 hover:bg-stone-50 cursor-pointer whitespace-nowrap transition-all">
+      6. NeuroMap Bank Sampah
+    </button>
+    <button onclick="goToSlide(7)" id="pill-7" class="px-3.5 py-2 rounded-2xl bg-white text-stone-600 border border-stone-200 hover:bg-stone-50 cursor-pointer whitespace-nowrap transition-all">
+      7. Dasbor Admin Institusi
+    </button>
+    <button onclick="goToSlide(8)" id="pill-8" class="px-3.5 py-2 rounded-2xl bg-white text-stone-600 border border-stone-200 hover:bg-stone-50 cursor-pointer whitespace-nowrap transition-all">
+      8. Super Admin Pusat
+    </button>
+  </div>
+
+  <!-- MAIN SLIDES CONTAINER (SIDE-BY-SIDE PRESENTATION) -->
+  <main class="max-w-6xl mx-auto">
+
+    <!-- ========================================== SLIDE 1: BERANDA WARGA ========================================== -->
+    <div id="slide-view-1" class="slide-block">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <div class="lg:col-span-5">
+          <div class="bg-white rounded-[44px] p-3 device-shadow border-4 border-stone-800 max-w-[360px] mx-auto relative">
+            <div class="w-28 h-4 bg-stone-900 rounded-full mx-auto mb-2 flex items-center justify-center">
+              <div class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
+            </div>
+            <div class="bg-stone-50 rounded-[34px] overflow-hidden border border-stone-200 text-stone-900 p-4 space-y-4 relative">
+              <div class="relative bg-white p-3 rounded-2xl border border-stone-200 flex items-center justify-between">
+                <div class="absolute -top-2.5 -left-2.5 w-6 h-6 rounded-full bg-emerald-600 text-white font-mono font-black text-xs flex items-center justify-center badge-pin z-10">1</div>
+                <div class="flex items-center gap-2.5">
+                  <div class="w-9 h-9 flex items-center justify-center shrink-0">
+                    <img src="/logo_NeuroCycle.png" alt="NeuroCycle Logo" onerror="this.src='https://placehold.co/60x60/059669/ffffff?text=NC'" class="w-full h-full object-contain" />
+                  </div>
+                  <div>
+                    <h2 class="text-sm font-display font-black text-emerald-900 leading-tight">Halo!</h2>
+                    <p class="text-[10px] font-semibold text-stone-600 truncate max-w-[140px]">favianyusuf9@gmail.com</p>
+                  </div>
+                </div>
+                <div class="flex gap-1.5">
+                  <div class="p-1.5 bg-stone-100 rounded-xl text-stone-500"><i data-lucide="bell" class="w-3.5 h-3.5"></i></div>
+                  <div class="p-1.5 bg-red-50 text-red-600 rounded-xl"><i data-lucide="log-out" class="w-3.5 h-3.5"></i></div>
+                </div>
+              </div>
+
+              <div class="relative bg-gradient-to-br from-emerald-600 via-teal-700 to-emerald-800 rounded-3xl p-4 text-white shadow-md shadow-emerald-700/20">
+                <div class="absolute -top-2.5 -left-2.5 w-6 h-6 rounded-full bg-emerald-600 text-white font-mono font-black text-xs flex items-center justify-center badge-pin z-10">2</div>
+                <div class="flex justify-between items-start mb-1">
+                  <span class="text-[9px] font-bold text-emerald-200 uppercase tracking-widest">Saldo NeuroPoints</span>
+                  <span class="text-[8px] bg-emerald-500/30 border border-emerald-300/40 px-2 py-0.5 rounded-full font-bold">Warga Aktif</span>
+                </div>
+                <div class="flex items-baseline gap-1 my-0.5">
+                  <h3 class="text-2xl font-display font-black tracking-tight">20,350</h3>
+                  <span class="text-xs font-bold text-amber-300">NP</span>
+                </div>
+                <p class="text-[9px] text-emerald-200 font-semibold mb-3">Tukar Voucer Sembako & Belanja →</p>
+                <div class="grid grid-cols-2 gap-2 pt-2.5 border-t border-emerald-500/30 text-[10px]">
+                  <div class="bg-emerald-900/30 p-1.5 rounded-xl">
+                    <span class="text-emerald-200 text-[8px] block uppercase">Daur Ulang</span>
+                    <span class="font-black text-xs">42.5 Kg</span>
+                  </div>
+                  <div class="bg-emerald-900/30 p-1.5 rounded-xl">
+                    <span class="text-emerald-200 text-[8px] block uppercase">Hemat Emisi</span>
+                    <span class="font-black text-xs">85.0 Kg CO₂</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="relative space-y-2">
+                <div class="absolute -top-2.5 -left-2.5 w-6 h-6 rounded-full bg-emerald-600 text-white font-mono font-black text-xs flex items-center justify-center badge-pin z-10">3</div>
+                <div class="bg-white p-3 rounded-2xl border border-stone-200 flex items-center gap-3">
+                  <div class="w-9 h-9 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0"><i data-lucide="recycle" class="w-4 h-4"></i></div>
+                  <div class="flex-1 min-w-0">
+                    <h4 class="font-display font-black text-xs text-stone-900">Bank Sampah & TPS3R</h4>
+                    <p class="text-[9px] text-stone-500 truncate">Setor sampah & raih poin</p>
+                  </div>
+                  <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-stone-400"></i>
+                </div>
+                <div class="bg-white p-3 rounded-2xl border border-stone-200 flex items-center gap-3">
+                  <div class="w-9 h-9 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center shrink-0"><i data-lucide="shopping-bag" class="w-4 h-4"></i></div>
+                  <div class="flex-1 min-w-0">
+                    <h4 class="font-display font-black text-xs text-stone-900">Pasar UMKM</h4>
+                    <p class="text-[9px] text-stone-500 truncate">Tukar voucer belanja lokal</p>
+                  </div>
+                  <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-stone-400"></i>
+                </div>
+              </div>
+
+              <div class="relative bg-white border border-stone-200 rounded-2xl p-2 px-3 flex justify-around text-stone-400 text-[9px] font-bold">
+                <div class="absolute -top-2.5 -left-2.5 w-6 h-6 rounded-full bg-emerald-600 text-white font-mono font-black text-xs flex items-center justify-center badge-pin z-10">4</div>
+                <div class="text-emerald-700 flex flex-col items-center"><i data-lucide="home" class="w-3.5 h-3.5"></i>Beranda</div>
+                <div class="flex flex-col items-center"><i data-lucide="scan" class="w-3.5 h-3.5"></i>Scanner</div>
+                <div class="flex flex-col items-center"><i data-lucide="trophy" class="w-3.5 h-3.5"></i>Peringkat</div>
+                <div class="flex flex-col items-center"><i data-lucide="user" class="w-3.5 h-3.5"></i>Profil</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-7 space-y-4">
+          <div class="bg-white rounded-3xl p-6 sm:p-7 border border-stone-200/80 shadow-xs">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-black uppercase tracking-wider">Slide 01 • Sisi Hulu Masyarakat</span>
+              <span class="text-xs text-stone-400 font-bold">Warga / Rumah Tangga / Pegawai</span>
+            </div>
+            <h2 class="text-2xl font-display font-black text-stone-900 tracking-tight">Beranda Pengguna (Ekosistem Hulu)</h2>
+            <p class="text-xs text-stone-500 mt-1">Titik awal bagi seluruh lapisan masyarakat—mulai dari warga perumahan, RT/RW, siswa sekolah, hingga karyawan perkantoran—untuk mengubah sampah harian menjadi aset berharga.</p>
+            <hr class="my-5 border-stone-100" />
+            <div class="space-y-3.5">
+              <div class="p-3.5 rounded-2xl bg-stone-50 border border-stone-200 flex items-start gap-3">
+                <span class="w-7 h-7 rounded-xl bg-emerald-600 text-white font-mono font-black text-xs flex items-center justify-center shrink-0 mt-0.5">1</span>
+                <div>
+                  <h3 class="font-bold text-xs text-stone-900">Akses Identitas Nasabah Terintegrasi</h3>
+                  <p class="text-xs text-stone-600 mt-0.5 leading-relaxed">Menampilkan identitas pengguna yang aman, notifikasi otomatis saat setoran berhasil diverifikasi mitra, dan status aktif nasabah di lingkungan komunitas.</p>
+                </div>
+              </div>
+              <div class="p-3.5 rounded-2xl bg-stone-50 border border-stone-200 flex items-start gap-3">
+                <span class="w-7 h-7 rounded-xl bg-emerald-600 text-white font-mono font-black text-xs flex items-center justify-center shrink-0 mt-0.5">2</span>
+                <div>
+                  <h3 class="font-bold text-xs text-stone-900">Dompet Dampak Lingkungan (Saldo Poin & Jejak Karbon)</h3>
+                  <p class="text-xs text-stone-600 mt-0.5 leading-relaxed">Menampilkan saldo <b>20,350 NP</b> yang bernilai ekonomi nyata. Dilengkapi metrik akumulatif: <b>42.5 Kg Sampah Terdaur Ulang</b> dan <b>85.0 Kg Emisi CO₂ Terkurangi</b> yang dapat dijadikan bukti kepedulian lingkungan warga.</p>
+                </div>
+              </div>
+              <div class="p-3.5 rounded-2xl bg-stone-50 border border-stone-200 flex items-start gap-3">
+                <span class="w-7 h-7 rounded-xl bg-emerald-600 text-white font-mono font-black text-xs flex items-center justify-center shrink-0 mt-0.5">3</span>
+                <div>
+                  <h3 class="font-bold text-xs text-stone-900">Navigasi Langsung ke Jaringan Daur Ulang & Pasar</h3>
+                  <p class="text-xs text-stone-600 mt-0.5 leading-relaxed">Warga dapat langsung mengakses formulir setoran Bank Sampah, memilih penukaran voucer belanja di pasar UMKM lokal, maupun mengikuti misi lingkungan.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================== SLIDE 2: KAMERA AI SCANNER ========================================== -->
+    <div id="slide-view-2" class="slide-block hidden">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <div class="lg:col-span-5">
+          <div class="bg-stone-900 rounded-[44px] p-3 device-shadow border-4 border-stone-800 max-w-[360px] mx-auto text-white">
+            <div class="w-28 h-4 bg-black rounded-full mx-auto mb-2"></div>
+            <div class="bg-stone-950 rounded-[34px] overflow-hidden border border-stone-800 p-4 space-y-4">
+              <div class="relative bg-stone-900 p-3 rounded-2xl border border-stone-800 flex items-center justify-between">
+                <div class="absolute -top-2.5 -left-2.5 w-6 h-6 rounded-full bg-teal-500 text-stone-950 font-mono font-black text-xs flex items-center justify-center badge-pin z-10">1</div>
+                <span class="text-xs font-bold text-stone-200 flex items-center gap-1.5"><i data-lucide="camera" class="w-3.5 h-3.5 text-emerald-400"></i> Kamera Pemilah AI</span>
+                <span class="text-[9px] bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-2 py-0.5 rounded-full font-bold">ONLINE</span>
+              </div>
+              <div class="relative h-48 bg-stone-900/60 rounded-3xl border border-stone-800 flex items-center justify-center overflow-hidden">
+                <div class="absolute -top-2.5 -left-2.5 w-6 h-6 rounded-full bg-teal-500 text-stone-950 font-mono font-black text-xs flex items-center justify-center badge-pin z-10">2</div>
+                <div class="w-32 h-32 border-2 border-emerald-400 rounded-2xl relative flex flex-col items-center justify-center shadow-lg shadow-emerald-500/20">
+                  <span class="absolute -top-3 left-2 bg-emerald-500 text-stone-950 text-[8px] font-black px-1.5 py-0.5 rounded">98% PLASTIK PET</span>
+                  <i data-lucide="cup-soda" class="w-12 h-12 text-emerald-400"></i>
+                  <span class="text-[9px] text-stone-200 font-bold mt-1">Botol Plastik</span>
+                </div>
+              </div>
+              <div class="relative bg-stone-900 p-3 rounded-2xl border border-stone-800 space-y-1.5">
+                <div class="absolute -top-2.5 -left-2.5 w-6 h-6 rounded-full bg-teal-500 text-stone-950 font-mono font-black text-xs flex items-center justify-center badge-pin z-10">3</div>
+                <div class="flex justify-between items-center text-xs">
+                  <span class="font-bold text-emerald-400">Botol Air Mineral</span>
+                  <span class="text-emerald-400 font-mono font-bold">+25 NP</span>
+                </div>
+                <p class="text-[10px] text-stone-300 leading-relaxed">
+                  ✓ 1. Kosongkan cairan sisa.<br/>
+                  ✓ 2. Lepas label & remas botol.<br/>
+                  ✓ 3. Bawa ke mitra bank sampah (+100 NP/Kg).
+                </p>
+              </div>
+              <button class="w-full py-2.5 bg-emerald-600 text-white font-bold text-xs rounded-xl flex items-center justify-center gap-1.5">
+                <i data-lucide="check" class="w-3.5 h-3.5"></i> Simpan Hasil Scan (+25 NP)
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-7 space-y-4">
+          <div class="bg-white rounded-3xl p-6 sm:p-7 border border-stone-200/80 shadow-xs">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="px-2.5 py-0.5 rounded-full bg-teal-100 text-teal-800 text-[10px] font-black uppercase tracking-wider">Slide 02 • Literasi Hulu</span>
+              <span class="text-xs text-stone-400 font-bold">Kamera AI Computer Vision</span>
+            </div>
+            <h2 class="text-2xl font-display font-black text-stone-900 tracking-tight">Kamera AI Scanner: Edukasi Pemilahan Instan</h2>
+            <p class="text-xs text-stone-500 mt-1">Mengatasi akar masalah rendahnya daur ulang di Indonesia, yaitu kebingungan warga membedakan jenis sampah di rumah tangga, kantor, maupun area publik.</p>
+            <hr class="my-5 border-stone-100" />
+            <div class="space-y-3.5">
+              <div class="p-3.5 rounded-2xl bg-stone-50 border border-stone-200 flex items-start gap-3">
+                <span class="w-7 h-7 rounded-xl bg-teal-600 text-white font-mono font-black text-xs flex items-center justify-center shrink-0 mt-0.5">1</span>
+                <div>
+                  <h3 class="font-bold text-xs text-stone-900">Pemindaian Universal Lintas Jenis Material</h3>
+                  <p class="text-xs text-stone-600 mt-0.5 leading-relaxed">Mengenali berbagai jenis sampah: Plastik PET/HDPE, Kertas/Kardus, Logam/Aluminium, Minyak Jelantah, hingga Organik dengan akurasi tinggi.</p>
+                </div>
+              </div>
+              <div class="p-3.5 rounded-2xl bg-stone-50 border border-stone-200 flex items-start gap-3">
+                <span class="w-7 h-7 rounded-xl bg-teal-600 text-white font-mono font-black text-xs flex items-center justify-center shrink-0 mt-0.5">2</span>
+                <div>
+                  <h3 class="font-bold text-xs text-stone-900">Panduan Teknis Langkah Pemilahan</h3>
+                  <p class="text-xs text-stone-600 mt-0.5 leading-relaxed">Memberikan instruksi kebersihan (cuci, keringkan, pipihkan) sehingga saat sampah tiba di bank sampah atau pabrik daur ulang, kondisinya higienis dan bernilai jual tinggi.</p>
+                </div>
+              </div>
+              <div class="p-3.5 rounded-2xl bg-stone-50 border border-stone-200 flex items-start gap-3">
+                <span class="w-7 h-7 rounded-xl bg-teal-600 text-white font-mono font-black text-xs flex items-center justify-center shrink-0 mt-0.5">3</span>
+                <div>
+                  <h3 class="font-bold text-xs text-stone-900">Umpan Balik Insentif Cepat</h3>
+                  <p class="text-xs text-stone-600 mt-0.5 leading-relaxed">Warga langsung diapresiasi dengan poin awal `+25 NP` sebagai rangsangan psikologis agar tidak lagi membuang sampah sembarangan.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================== SLIDE 3: PAPAN PERINGKAT ========================================== -->
+    <div id="slide-view-3" class="slide-block hidden">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <div class="lg:col-span-5">
+          <div class="bg-white rounded-[44px] p-3 device-shadow border-4 border-stone-800 max-w-[360px] mx-auto">
+            <div class="w-28 h-4 bg-stone-900 rounded-full mx-auto mb-2"></div>
+            <div class="bg-stone-50 rounded-[34px] overflow-hidden border border-stone-200 text-stone-900 p-4 space-y-4">
+              <div class="relative flex gap-1 text-[10px] font-bold">
+                <div class="absolute -top-2.5 -left-2.5 w-6 h-6 rounded-full bg-amber-500 text-stone-950 font-mono font-black text-xs flex items-center justify-center badge-pin z-10">1</div>
+                <span class="px-2.5 py-1 bg-stone-900 text-white rounded-xl">Scanner AI</span>
+                <span class="px-2.5 py-1 bg-white text-stone-600 border border-stone-200 rounded-xl">Pengumpul</span>
+                <span class="px-2.5 py-1 bg-white text-stone-600 border border-stone-200 rounded-xl">Si Paling Kuis</span>
+              </div>
+              <div class="relative bg-gradient-to-b from-amber-50 to-white rounded-3xl p-4 border border-amber-200 text-center shadow-xs">
+                <div class="absolute -top-2.5 -left-2.5 w-6 h-6 rounded-full bg-amber-500 text-stone-950 font-mono font-black text-xs flex items-center justify-center badge-pin z-10">2</div>
+                <div class="w-12 h-12 rounded-full bg-gradient-to-tr from-amber-400 to-yellow-300 text-stone-950 font-black text-lg flex items-center justify-center mx-auto shadow-sm border-2 border-white mb-1">🥇</div>
+                <h3 class="font-display font-black text-sm text-stone-900">Favian Yusuf</h3>
+                <p class="text-[10px] text-stone-500">favianyusuf9@gmail.com</p>
+                <div class="mt-2 inline-flex items-center gap-1 bg-emerald-100 text-emerald-800 px-2.5 py-0.5 rounded-full text-[10px] font-black">
+                  <span>128 Scan Valid</span> • <span>+1,000 NP</span>
+                </div>
+              </div>
+              <div class="relative bg-white p-3 rounded-2xl border border-stone-200 flex items-center justify-between text-xs">
+                <div class="absolute -top-2.5 -left-2.5 w-6 h-6 rounded-full bg-amber-500 text-stone-950 font-mono font-black text-xs flex items-center justify-center badge-pin z-10">3</div>
+                <div>
+                  <span class="text-[9px] font-bold text-stone-400 block uppercase">Status Hadiah Juara #1</span>
+                  <span class="font-bold text-emerald-800 text-[11px]">Klaim Poin Sah</span>
+                </div>
+                <span class="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[9px] font-black border border-emerald-200">DITERIMA</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-7 space-y-4">
+          <div class="bg-white rounded-3xl p-6 sm:p-7 border border-stone-200/80 shadow-xs">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800 text-[10px] font-black uppercase tracking-wider">Slide 03 • Gamifikasi Komunitas</span>
+              <span class="text-xs text-stone-400 font-bold">Papan Peringkat Juara</span>
+            </div>
+            <h2 class="text-2xl font-display font-black text-stone-900 tracking-tight">Gamifikasi & Apresiasi Juara Transparan</h2>
+            <p class="text-xs text-stone-500 mt-1">Membakar semangat kompetisi positif antar warga di lingkungan perumahan, kelurahan, maupun antar instansi dan sekolah binaan.</p>
+            <hr class="my-5 border-stone-100" />
+            <div class="space-y-3.5">
+              <div class="p-3.5 rounded-2xl bg-stone-50 border border-stone-200 flex items-start gap-3">
+                <span class="w-7 h-7 rounded-xl bg-amber-500 text-stone-950 font-mono font-black text-xs flex items-center justify-center shrink-0 mt-0.5">1</span>
+                <div>
+                  <h3 class="font-bold text-xs text-stone-900">3 Jalur Kompetisi Adil</h3>
+                  <p class="text-xs text-stone-600 mt-0.5 leading-relaxed">Warga yang rajin memilah sampah di rumah bisa juara di kategori **Scanner AI**, warga yang aktif menyetor fisik juara di kategori **Pengumpul**, dan pelajar/pemuda yang giat belajar bisa juara di **Si Paling Kuis**.</p>
+                </div>
+              </div>
+              <div class="p-3.5 rounded-2xl bg-stone-50 border border-stone-200 flex items-start gap-3">
+                <span class="w-7 h-7 rounded-xl bg-amber-500 text-stone-950 font-mono font-black text-xs flex items-center justify-center shrink-0 mt-0.5">2</span>
+                <div>
+                  <h3 class="font-bold text-xs text-stone-900">Aturan Klaim Ketat (Deduplikasi Pemenang)</h3>
+                  <p class="text-xs text-stone-600 mt-0.5 leading-relaxed">Setiap nasabah hanya berhak atas **1 klaim hadiah per kategori juara** yang dimenangkan. Hadiah diverifikasi otomatis dan tidak dapat diklaim berkali-kali untuk menjaga keadilan ekosistem.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================== SLIDE 4: SETORAN FISIK MITRA ========================================== -->
+    <div id="slide-view-4" class="slide-block hidden">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <div class="lg:col-span-5">
+          <div class="bg-white rounded-[44px] p-3 device-shadow border-4 border-stone-800 max-w-[360px] mx-auto">
+            <div class="w-28 h-4 bg-stone-900 rounded-full mx-auto mb-2"></div>
+            <div class="bg-stone-50 rounded-[34px] overflow-hidden border border-stone-200 text-stone-900 p-4 space-y-4">
+              <div class="relative bg-stone-900 text-white p-3 rounded-2xl flex items-center justify-between">
+                <div class="absolute -top-2.5 -left-2.5 w-6 h-6 rounded-full bg-blue-600 text-white font-mono font-black text-xs flex items-center justify-center badge-pin z-10">1</div>
+                <div>
+                  <h3 class="text-xs font-display font-black">Bank Sampah / TPS3R</h3>
+                  <p class="text-[9px] text-stone-400">Penerimaan Setoran Fisik</p>
+                </div>
+                <span class="px-2 py-0.5 bg-emerald-500/20 text-emerald-400 text-[9px] font-bold rounded-full">Operator</span>
+              </div>
+              <div class="relative bg-white p-3 rounded-2xl border border-stone-200">
+                <div class="absolute -top-2.5 -left-2.5 w-6 h-6 rounded-full bg-blue-600 text-white font-mono font-black text-xs flex items-center justify-center badge-pin z-10">2</div>
+                <span class="text-[8px] font-black text-stone-400 uppercase tracking-wider block">Nasabah Terverifikasi (QR)</span>
+                <p class="font-bold text-stone-900 text-xs">Favian Yusuf</p>
+                <p class="text-[9px] text-stone-500">favianyusuf9@gmail.com</p>
+              </div>
+              <div class="relative bg-white p-3 rounded-2xl border border-stone-200 flex justify-between items-center">
+                <div class="absolute -top-2.5 -left-2.5 w-6 h-6 rounded-full bg-blue-600 text-white font-mono font-black text-xs flex items-center justify-center badge-pin z-10">3</div>
+                <div>
+                  <span class="text-[8px] font-black text-stone-400 uppercase tracking-wider block">Bobot Timbangan</span>
+                  <p class="font-display font-black text-lg text-stone-900">8.5 <span class="text-xs font-bold text-stone-500">Kg</span></p>
+                </div>
+                <div class="text-right">
+                  <span class="text-[8px] font-black text-stone-400 uppercase tracking-wider block">Poin Cair</span>
+                  <p class="font-display font-black text-lg text-emerald-600">+850 NP</p>
+                </div>
+              </div>
+              <div class="relative bg-amber-50 border-2 border-dashed border-amber-300 rounded-2xl p-3 text-center">
+                <div class="absolute -top-2.5 -left-2.5 w-6 h-6 rounded-full bg-blue-600 text-white font-mono font-black text-xs flex items-center justify-center badge-pin z-10">4</div>
+                <span class="text-[9px] font-black text-amber-900 uppercase tracking-wider block mb-1">Wajib: Foto Timbangan Fisik</span>
+                <div class="h-20 bg-white rounded-xl border border-amber-200 flex flex-col items-center justify-center text-stone-500">
+                  <i data-lucide="camera" class="w-5 h-5 text-amber-600 mb-0.5"></i>
+                  <span class="text-[9px] font-bold text-stone-700">Foto Sampah + Layar Timbangan</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-7 space-y-4">
+          <div class="bg-white rounded-3xl p-6 sm:p-7 border border-stone-200/80 shadow-xs">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="px-2.5 py-0.5 rounded-full bg-blue-100 text-blue-800 text-[10px] font-black uppercase tracking-wider">Slide 04 • Titik Hilir Fisik</span>
+              <span class="text-xs text-stone-400 font-bold">Bank Sampah Unit & TPS3R</span>
+            </div>
+            <h2 class="text-2xl font-display font-black text-stone-900 tracking-tight">Verifikasi Dua Arah Anti-Manipulasi (*Dual-Handshake*)</h2>
+            <p class="text-xs text-stone-500 mt-1">Mengamankan operasional bank sampah konvensional yang selama ini rentan terhadap pencatatan manual berbasis kertas yang lambat dan rawan rekayasa timbangan.</p>
+            <hr class="my-5 border-stone-100" />
+            <div class="space-y-3.5">
+              <div class="p-3.5 rounded-2xl bg-stone-50 border border-stone-200 flex items-start gap-3">
+                <span class="w-7 h-7 rounded-xl bg-blue-600 text-white font-mono font-black text-xs flex items-center justify-center shrink-0 mt-0.5">1</span>
+                <div>
+                  <h3 class="font-bold text-xs text-stone-900">Scan QR Code Identitas Personal</h3>
+                  <p class="text-xs text-stone-600 mt-0.5 leading-relaxed">Nasabah cukup menunjukkan layar QR token ponselnya. Operator memindai sekali dan identitas langsung tercatat otomatis tanpa antrean lama.</p>
+                </div>
+              </div>
+              <div class="p-3.5 rounded-2xl bg-stone-50 border border-stone-200 flex items-start gap-3">
+                <span class="w-7 h-7 rounded-xl bg-blue-600 text-white font-mono font-black text-xs flex items-center justify-center shrink-0 mt-0.5">2</span>
+                <div>
+                  <h3 class="font-bold text-xs text-stone-900">Bukti Foto Timbangan Fisik Wajib</h3>
+                  <p class="text-xs text-stone-600 mt-0.5 leading-relaxed"><b>Pilar Anti-Kecurangan:</b> Setiap transaksi wajib menyertakan foto tumpukan sampah bersama layar jarum/angka timbangan digital sebagai bukti fisik tak terbantahkan.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================== SLIDE 5: PASAR UMKM ========================================== -->
+    <div id="slide-view-5" class="slide-block hidden">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <div class="lg:col-span-5">
+          <div class="bg-white rounded-[44px] p-3 device-shadow border-4 border-stone-800 max-w-[360px] mx-auto">
+            <div class="w-28 h-4 bg-stone-900 rounded-full mx-auto mb-2"></div>
+            <div class="bg-stone-50 rounded-[34px] overflow-hidden border border-stone-200 text-stone-900 p-4 space-y-3.5">
+              <div class="relative bg-white p-3 rounded-2xl border border-stone-200 flex items-center justify-between">
+                <div class="absolute -top-2.5 -left-2.5 w-6 h-6 rounded-full bg-emerald-600 text-white font-mono font-black text-xs flex items-center justify-center badge-pin z-10">1</div>
+                <div>
+                  <h3 class="text-xs font-display font-black text-stone-900">Katalog Hadiah & Voucer</h3>
+                  <p class="text-[9px] text-stone-400">Ekonomi Sirkular Nyata</p>
+                </div>
+                <span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 text-[9px] font-black rounded-full">Saldo: 20,350 NP</span>
+              </div>
+
+              <!-- Item 1: Voucer Sembako UMKM -->
+              <div class="relative bg-white p-3 rounded-2xl border border-stone-200 space-y-1.5">
+                <div class="absolute -top-2.5 -left-2.5 w-6 h-6 rounded-full bg-emerald-600 text-white font-mono font-black text-xs flex items-center justify-center badge-pin z-10">2</div>
+                <div class="flex justify-between items-start">
+                  <div>
+                    <h4 class="font-bold text-xs text-stone-900">Diskon Beras Rp 15.000</h4>
+                    <p class="text-[9px] text-stone-500">Toko Kelontong Bu Ani (Mitra RT 04)</p>
+                  </div>
+                  <span class="font-black text-emerald-600 text-xs">750 NP</span>
+                </div>
+                <button class="w-full py-1.5 bg-emerald-600 text-white text-[10px] font-bold rounded-xl mt-1">Tukar Voucer</button>
+              </div>
+
+              <!-- Item 2: Saldo Digital / E-Wallet -->
+              <div class="relative bg-white p-3 rounded-2xl border border-stone-200 space-y-1.5">
+                <div class="absolute -top-2.5 -left-2.5 w-6 h-6 rounded-full bg-emerald-600 text-white font-mono font-black text-xs flex items-center justify-center badge-pin z-10">3</div>
+                <div class="flex justify-between items-start">
+                  <div>
+                    <h4 class="font-bold text-xs text-stone-900">Saldo DANA Rp 10.000</h4>
+                    <p class="text-[9px] text-stone-500">Pencairan Dompet Digital</p>
+                  </div>
+                  <span class="font-black text-emerald-600 text-xs">1,000 NP</span>
+                </div>
+                <button class="w-full py-1.5 bg-stone-900 text-white text-[10px] font-bold rounded-xl mt-1">Klaim Saldo</button>
+              </div>
+
+              <!-- Item 3: Token Listrik PLN -->
+              <div class="relative bg-white p-3 rounded-2xl border border-stone-200 space-y-1.5">
+                <div class="flex justify-between items-start">
+                  <div>
+                    <h4 class="font-bold text-xs text-stone-900">Token Listrik PLN Rp 20.000</h4>
+                    <p class="text-[9px] text-stone-500">Kebutuhan Rumah Tangga</p>
+                  </div>
+                  <span class="font-black text-emerald-600 text-xs">2,000 NP</span>
+                </div>
+                <button class="w-full py-1.5 bg-stone-900 text-white text-[10px] font-bold rounded-xl mt-1">Klaim Token</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-7 space-y-4">
+          <div class="bg-white rounded-3xl p-6 sm:p-7 border border-stone-200/80 shadow-xs">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-black uppercase tracking-wider">Slide 05 • Perputaran Ekonomi Lokal</span>
+              <span class="text-xs text-stone-400 font-bold">Pasar UMKM & Saldo Digital</span>
+            </div>
+            <h2 class="text-2xl font-display font-black text-stone-900 tracking-tight">Ekonomi Sirkular: Dari Sampah Jadi Belanja Sembako</h2>
+            <p class="text-xs text-stone-500 mt-1">Poin daur ulang tidak berhenti di aplikasi, melainkan berputar kembali ke warung kelontong, pasar tradisional, dan kebutuhan harian rumah tangga.</p>
+            <hr class="my-5 border-stone-100" />
+            <div class="space-y-3.5">
+              <div class="p-3.5 rounded-2xl bg-stone-50 border border-stone-200 flex items-start gap-3">
+                <span class="w-7 h-7 rounded-xl bg-emerald-600 text-white font-mono font-black text-xs flex items-center justify-center shrink-0 mt-0.5">1</span>
+                <div>
+                  <h3 class="font-bold text-xs text-stone-900">Kerja Sama dengan Warung & UMKM Lokal</h3>
+                  <p class="text-xs text-stone-600 mt-0.5 leading-relaxed">Warga dapat menukarkan poin menjadi voucer belanja beras, minyak goreng, dan sembako di warung tetangga sekitar bank sampah, menghidupkan perekonomian akar rumput.</p>
+                </div>
+              </div>
+              <div class="p-3.5 rounded-2xl bg-stone-50 border border-stone-200 flex items-start gap-3">
+                <span class="w-7 h-7 rounded-xl bg-emerald-600 text-white font-mono font-black text-xs flex items-center justify-center shrink-0 mt-0.5">2</span>
+                <div>
+                  <h3 class="font-bold text-xs text-stone-900">Pilihan Saldo Digital & Pembayaran Utilitas</h3>
+                  <p class="text-xs text-stone-600 mt-0.5 leading-relaxed">Memberikan fleksibilitas bagi generasi muda dan pelajar untuk mencairkan poin menjadi saldo e-wallet (DANA, GoPay) maupun token listrik PLN rumah tangga.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================== SLIDE 6: NEUROMAP BANK SAMPAH ========================================== -->
+    <div id="slide-view-6" class="slide-block hidden">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <div class="lg:col-span-5">
+          <div class="bg-white rounded-[44px] p-3 device-shadow border-4 border-stone-800 max-w-[360px] mx-auto">
+            <div class="w-28 h-4 bg-stone-900 rounded-full mx-auto mb-2"></div>
+            <div class="bg-stone-50 rounded-[34px] overflow-hidden border border-stone-200 text-stone-900 p-4 space-y-3.5">
+              <div class="relative bg-white p-3 rounded-2xl border border-stone-200 flex items-center justify-between">
+                <div class="absolute -top-2.5 -left-2.5 w-6 h-6 rounded-full bg-teal-600 text-white font-mono font-black text-xs flex items-center justify-center badge-pin z-10">1</div>
+                <div>
+                  <h3 class="text-xs font-display font-black text-stone-900">NeuroMap Direktori</h3>
+                  <p class="text-[9px] text-stone-400">Jaringan Bank Sampah & TPS3R</p>
+                </div>
+                <span class="px-2 py-0.5 bg-teal-100 text-teal-800 text-[9px] font-black rounded-full">Radius 3 Km</span>
+              </div>
+
+              <!-- Map Placeholder Box -->
+              <div class="relative h-44 bg-emerald-950/10 rounded-2xl border border-emerald-300 flex flex-col items-center justify-center p-3 text-center">
+                <div class="absolute -top-2.5 -left-2.5 w-6 h-6 rounded-full bg-teal-600 text-white font-mono font-black text-xs flex items-center justify-center badge-pin z-10">2</div>
+                <i data-lucide="map-pin" class="w-8 h-8 text-emerald-600 mb-1 animate-bounce"></i>
+                <p class="font-bold text-xs text-stone-800">Bank Sampah Berkah (450m)</p>
+                <p class="text-[9px] text-stone-500">Buka Hari Ini: 08:00 - 15:00 WIB</p>
+                <button class="mt-2 px-3 py-1 bg-emerald-600 text-white rounded-xl text-[9px] font-bold">Rute Petunjuk Arah ↗</button>
+              </div>
+
+              <!-- List Lokasi -->
+              <div class="relative bg-white p-2.5 rounded-2xl border border-stone-200 space-y-1.5 text-xs">
+                <div class="absolute -top-2.5 -left-2.5 w-6 h-6 rounded-full bg-teal-600 text-white font-mono font-black text-xs flex items-center justify-center badge-pin z-10">3</div>
+                <div class="flex justify-between items-center text-[10px]">
+                  <span class="font-bold text-stone-800">1. TPS3R Mandiri Berseri</span>
+                  <span class="text-emerald-600 font-bold">1.2 Km</span>
+                </div>
+                <div class="flex justify-between items-center text-[10px] pt-1 border-t border-stone-100">
+                  <span class="font-bold text-stone-800">2. Bank Sampah Induk Kota</span>
+                  <span class="text-emerald-600 font-bold">2.8 Km</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-7 space-y-4">
+          <div class="bg-white rounded-3xl p-6 sm:p-7 border border-stone-200/80 shadow-xs">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="px-2.5 py-0.5 rounded-full bg-teal-100 text-teal-800 text-[10px] font-black uppercase tracking-wider">Slide 06 • Integrasi Geospasial</span>
+              <span class="text-xs text-stone-400 font-bold">Pemetaan Daur Ulang</span>
+            </div>
+            <h2 class="text-2xl font-display font-black text-stone-900 tracking-tight">NeuroMap: Direktori Geospasial Bank Sampah</h2>
+            <p class="text-xs text-stone-500 mt-1">Menghubungkan masyarakat dengan titik pembuangan dan pengolahan sampah terdekat di seluruh penjuru kota.</p>
+            <hr class="my-5 border-stone-100" />
+            <div class="space-y-3.5">
+              <div class="p-3.5 rounded-2xl bg-stone-50 border border-stone-200 flex items-start gap-3">
+                <span class="w-7 h-7 rounded-xl bg-teal-600 text-white font-mono font-black text-xs flex items-center justify-center shrink-0 mt-0.5">1</span>
+                <div>
+                  <h3 class="font-bold text-xs text-stone-900">Peta Interaktif Radius Terdekat</h3>
+                  <p class="text-xs text-stone-600 mt-0.5 leading-relaxed">Warga dapat melihat titik koordinat bank sampah, jam operasional buka, jenis sampah yang diterima (misal: plastik, jelantah, kardus), dan nomor kontak pengurus.</p>
+                </div>
+              </div>
+              <div class="p-3.5 rounded-2xl bg-stone-50 border border-stone-200 flex items-start gap-3">
+                <span class="w-7 h-7 rounded-xl bg-teal-600 text-white font-mono font-black text-xs flex items-center justify-center shrink-0 mt-0.5">2</span>
+                <div>
+                  <h3 class="font-bold text-xs text-stone-900">Petunjuk Rute Terintegrasi</h3>
+                  <p class="text-xs text-stone-600 mt-0.5 leading-relaxed">Terhubung langsung ke aplikasi navigasi untuk memandu nasabah menyetorkan sampah tanpa tersesat, mendukung percepatan logistik sampah perkotaan.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================== SLIDE 7: DASBOR ADMIN INSTITUSI ========================================== -->
+    <div id="slide-view-7" class="slide-block hidden">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <div class="lg:col-span-6">
+          <div class="bg-white rounded-3xl p-5 device-shadow border-4 border-stone-800 text-stone-900 space-y-4">
+            <!-- Header Institusi -->
+            <div class="relative bg-stone-900 text-white p-3.5 rounded-2xl flex items-center justify-between">
+              <div class="absolute -top-2.5 -left-2.5 w-6 h-6 rounded-full bg-indigo-600 text-white font-mono font-black text-xs flex items-center justify-center badge-pin z-10">1</div>
+              <div class="flex items-center gap-2.5">
+                <div class="w-8 h-8 flex items-center justify-center shrink-0">
+                  <img src="/logo_NeuroCycle.png" alt="NeuroCycle Logo" onerror="this.src='https://placehold.co/60x60/059669/ffffff?text=NC'" class="w-full h-full object-contain" />
+                </div>
+                <div>
+                  <h3 class="text-xs font-display font-black leading-tight">Institution Admin Dashboard</h3>
+                  <p class="text-[9px] text-stone-400">SMAN 1 Adiwiyata • ID: INST-88219</p>
+                </div>
+              </div>
+              <span class="px-2 py-0.5 bg-red-600 text-white text-[9px] font-bold rounded-lg cursor-pointer">Logout</span>
+            </div>
+
+            <!-- 4 Metrik Riil Dashboard Institusi -->
+            <div class="relative grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
+              <div class="absolute -top-2.5 -left-2.5 w-6 h-6 rounded-full bg-indigo-600 text-white font-mono font-black text-xs flex items-center justify-center badge-pin z-10">2</div>
+              <div class="bg-stone-50 p-2.5 rounded-xl border border-stone-200">
+                <span class="text-[8px] font-black text-stone-400 uppercase block">Total Partners</span>
+                <p class="font-display font-black text-base text-stone-900">4 Mitra</p>
+              </div>
+              <div class="bg-stone-50 p-2.5 rounded-xl border border-stone-200">
+                <span class="text-[8px] font-black text-stone-400 uppercase block">Total Users</span>
+                <p class="font-display font-black text-base text-stone-900">340 Akun</p>
+              </div>
+              <div class="bg-stone-50 p-2.5 rounded-xl border border-stone-200">
+                <span class="text-[8px] font-black text-emerald-600 uppercase block">Approved Partners</span>
+                <p class="font-display font-black text-base text-emerald-600">3 Aktif</p>
+              </div>
+              <div class="bg-stone-50 p-2.5 rounded-xl border border-stone-200">
+                <span class="text-[8px] font-black text-amber-600 uppercase block">Pending Partners</span>
+                <p class="font-display font-black text-base text-amber-600">1 Baru</p>
+              </div>
+            </div>
+
+            <!-- Tab Navigasi Riil -->
+            <div class="relative flex gap-1.5 overflow-x-auto pb-1 text-[10px] font-bold">
+              <div class="absolute -top-2.5 -left-2.5 w-6 h-6 rounded-full bg-indigo-600 text-white font-mono font-black text-xs flex items-center justify-center badge-pin z-10">3</div>
+              <span class="px-3 py-1.5 rounded-xl bg-white text-stone-600 border border-stone-200">Partners</span>
+              <span class="px-3 py-1.5 rounded-xl bg-white text-stone-600 border border-stone-200 flex items-center gap-1">
+                Persetujuan <span class="bg-amber-500 text-white text-[8px] px-1 py-0.2 rounded-full font-black">1</span>
+              </span>
+              <span class="px-3 py-1.5 rounded-xl bg-white text-stone-600 border border-stone-200">Users (Nasabah)</span>
+              <span class="px-3 py-1.5 rounded-xl bg-stone-900 text-white">Transactions (Audit)</span>
+            </div>
+
+            <!-- Tabel Audit Transaksi Fisik & Foto Bukti -->
+            <div class="relative bg-white rounded-2xl border border-stone-200 overflow-hidden text-[10px]">
+              <div class="absolute -top-2.5 -left-2.5 w-6 h-6 rounded-full bg-indigo-600 text-white font-mono font-black text-xs flex items-center justify-center badge-pin z-10">4</div>
+              <div class="p-2.5 bg-stone-50 border-b border-stone-100 flex justify-between items-center font-bold">
+                <span class="text-stone-700">Audit Transaksi Fisik Partner & Bukti Foto</span>
+                <span class="text-stone-400 font-mono text-[9px]">Wajib Foto Timbangan Sah</span>
+              </div>
+              <div class="p-2.5 space-y-2">
+                <div class="p-2 bg-stone-50 rounded-xl border border-stone-100 flex items-center justify-between gap-2">
+                  <div class="flex items-center gap-2">
+                    <div class="w-10 h-10 rounded-lg bg-emerald-100 border border-emerald-300 flex items-center justify-center shrink-0 overflow-hidden">
+                      <span class="text-[8px] font-black text-emerald-800 text-center">FOTO BUKTI</span>
+                    </div>
+                    <div>
+                      <p class="font-bold text-stone-900 leading-tight">Bank Sampah Melati Indah</p>
+                      <p class="text-[9px] text-stone-500">Nasabah: favianyusuf9@gmail.com</p>
+                      <p class="text-[9px] text-emerald-700 font-semibold">Plastik Botol PET (4.5 kg) • +900 NP</p>
+                    </div>
+                  </div>
+                  <div class="text-right shrink-0">
+                    <span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[8px] font-black uppercase">Terverifikasi</span>
+                    <p class="text-[8px] text-stone-400 mt-0.5">Hari ini, 09:15</p>
+                  </div>
+                </div>
+
+                <div class="p-2 bg-stone-50 rounded-xl border border-stone-100 flex items-center justify-between gap-2">
+                  <div class="flex items-center gap-2">
+                    <div class="w-10 h-10 rounded-lg bg-stone-200 border border-stone-300 flex items-center justify-center shrink-0 overflow-hidden">
+                      <span class="text-[8px] font-black text-stone-600 text-center">FOTO BUKTI</span>
+                    </div>
+                    <div>
+                      <p class="font-bold text-stone-900 leading-tight">Bank Sampah Mandiri Bersih</p>
+                      <p class="text-[9px] text-stone-500">Nasabah: budi.santoso@gmail.com</p>
+                      <p class="text-[9px] text-emerald-700 font-semibold">Kertas & Karton (12.0 kg) • +1,800 NP</p>
+                    </div>
+                  </div>
+                  <div class="text-right shrink-0">
+                    <span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[8px] font-black uppercase">Terverifikasi</span>
+                    <p class="text-[8px] text-stone-400 mt-0.5">Kemarin, 14:30</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-6 space-y-4">
+          <div class="bg-white rounded-3xl p-6 sm:p-7 border border-stone-200/80 shadow-xs">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="px-2.5 py-0.5 rounded-full bg-indigo-100 text-indigo-800 text-[10px] font-black uppercase tracking-wider">Slide 07 • Pengelolaan Mitra & Audit Setoran Fisik</span>
+              <span class="text-xs text-stone-400 font-bold">Dasbor Admin Institusi</span>
+            </div>
+            <h2 class="text-2xl font-display font-black text-stone-900 tracking-tight">Dasbor Admin Institusi (Institution Admin Dashboard)</h2>
+            <p class="text-xs text-stone-500 mt-1">Pusat kendali entitas institusi (sekolah, kampus, perkantoran, atau asosiasi) untuk mengelola jaringan bank sampah terafiliasi, memverifikasi permohonan mitra baru, dan mengaudit riwayat setoran fisik secara transparan.</p>
+            <hr class="my-5 border-stone-100" />
+            <div class="space-y-3.5">
+              <div class="p-3.5 rounded-2xl bg-stone-50 border border-stone-200 flex items-start gap-3">
+                <span class="w-7 h-7 rounded-xl bg-indigo-600 text-white font-mono font-black text-xs flex items-center justify-center shrink-0 mt-0.5">1</span>
+                <div>
+                  <h3 class="font-bold text-xs text-stone-900">Identitas Multi-Tenant & Otentikasi Institusi</h3>
+                  <p class="text-xs text-stone-600 mt-0.5 leading-relaxed">Admin institusi memiliki hak akses terisolasi berdasarkan kode unik institusi (misal: SMAN 1 Adiwiyata atau korporasi), sehingga data mitra dan nasabah tidak bercampur dengan institusi lain.</p>
+                </div>
+              </div>
+              <div class="p-3.5 rounded-2xl bg-stone-50 border border-stone-200 flex items-start gap-3">
+                <span class="w-7 h-7 rounded-xl bg-indigo-600 text-white font-mono font-black text-xs flex items-center justify-center shrink-0 mt-0.5">2</span>
+                <div>
+                  <h3 class="font-bold text-xs text-stone-900">4 Metrik Operasional Utama</h3>
+                  <p class="text-xs text-stone-600 mt-0.5 leading-relaxed">Memberikan ringkasan instan mengenai total mitra bank sampah (<code class="bg-white px-1 py-0.5 rounded border border-stone-200 font-mono text-[10px]">Total Partners</code>), jumlah nasabah terafiliasi (<code class="bg-white px-1 py-0.5 rounded border border-stone-200 font-mono text-[10px]">Total Users</code>), mitra yang disetujui (<code class="bg-white px-1 py-0.5 rounded border border-stone-200 font-mono text-[10px]">Approved</code>), dan permohonan menunggu (<code class="bg-white px-1 py-0.5 rounded border border-stone-200 font-mono text-[10px]">Pending</code>).</p>
+                </div>
+              </div>
+              <div class="p-3.5 rounded-2xl bg-stone-50 border border-stone-200 flex items-start gap-3">
+                <span class="w-7 h-7 rounded-xl bg-indigo-600 text-white font-mono font-black text-xs flex items-center justify-center shrink-0 mt-0.5">3</span>
+                <div>
+                  <h3 class="font-bold text-xs text-stone-900">Manajemen & Persetujuan Kemitraan (4 Tab Inti)</h3>
+                  <p class="text-xs text-stone-600 mt-0.5 leading-relaxed">Menyediakan 4 tab kerja: kelola daftar mitra aktif (<code class="bg-white px-1 py-0.5 rounded border border-stone-200 font-mono text-[10px]">Partners</code>), verifikasi & persetujuan mitra baru (<code class="bg-white px-1 py-0.5 rounded border border-stone-200 font-mono text-[10px]">Persetujuan Partner</code>), daftar nasabah/warga (<code class="bg-white px-1 py-0.5 rounded border border-stone-200 font-mono text-[10px]">Users</code>), dan riwayat setoran (<code class="bg-white px-1 py-0.5 rounded border border-stone-200 font-mono text-[10px]">Transactions</code>).</p>
+                </div>
+              </div>
+              <div class="p-3.5 rounded-2xl bg-stone-50 border border-stone-200 flex items-start gap-3">
+                <span class="w-7 h-7 rounded-xl bg-indigo-600 text-white font-mono font-black text-xs flex items-center justify-center shrink-0 mt-0.5">4</span>
+                <div>
+                  <h3 class="font-bold text-xs text-stone-900">Audit Bukti Foto Timbangan Sah & Anti-Kecurangan</h3>
+                  <p class="text-xs text-stone-600 mt-0.5 leading-relaxed">Setiap setoran fisik yang masuk wajib menyertakan foto bukti timbangan sah (<code class="bg-white px-1 py-0.5 rounded border border-stone-200 font-mono text-[10px]">photoUrl</code>). Sistem secara otomatis memfilter transaksi palsu dan memberikan peringatan jika terdapat setoran anomali (&gt;50 kg atau setoran berulang yang mencurigakan).</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================== SLIDE 8: SUPER ADMIN PUSAT ========================================== -->
+    <div id="slide-view-8" class="slide-block hidden">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <div class="lg:col-span-6">
+          <div class="bg-white rounded-3xl p-5 device-shadow border-4 border-stone-800 text-stone-900 space-y-4">
+            <div class="relative bg-stone-900 text-white p-3.5 rounded-2xl flex items-center justify-between">
+              <div class="absolute -top-2.5 -left-2.5 w-6 h-6 rounded-full bg-purple-600 text-white font-mono font-black text-xs flex items-center justify-center badge-pin z-10">1</div>
+              <div class="flex items-center gap-2.5">
+                <div class="w-8 h-8 flex items-center justify-center shrink-0">
+                  <img src="/logo_NeuroCycle.png" alt="NeuroCycle Logo" onerror="this.src='https://placehold.co/60x60/059669/ffffff?text=NC'" class="w-full h-full object-contain" />
+                </div>
+                <div>
+                  <h3 class="font-display font-black text-xs leading-none">Super Admin Platform</h3>
+                  <p class="text-[9px] text-stone-400 mt-0.5">Pusat Kendali Ekosistem</p>
+                </div>
+              </div>
+              <span class="px-2 py-0.5 bg-red-600 text-white text-[9px] font-bold rounded-lg">Logout</span>
+            </div>
+
+            <div class="relative grid grid-cols-3 gap-2 text-xs">
+              <div class="absolute -top-2.5 -left-2.5 w-6 h-6 rounded-full bg-purple-600 text-white font-mono font-black text-xs flex items-center justify-center badge-pin z-10">2</div>
+              <div class="bg-stone-50 p-2 rounded-xl border border-stone-200">
+                <span class="text-[8px] font-black text-stone-400 uppercase block">Mitra</span>
+                <p class="font-display font-black text-base text-stone-900">12</p>
+              </div>
+              <div class="bg-stone-50 p-2 rounded-xl border border-stone-200">
+                <span class="text-[8px] font-black text-stone-400 uppercase block">Nasabah</span>
+                <p class="font-display font-black text-base text-stone-900">78</p>
+              </div>
+              <div class="bg-stone-50 p-2 rounded-xl border border-stone-200">
+                <span class="text-[8px] font-black text-emerald-600 uppercase block">Setoran</span>
+                <p class="font-display font-black text-base text-emerald-600">62</p>
+              </div>
+            </div>
+
+            <div class="relative bg-white rounded-2xl border border-stone-200 overflow-hidden text-xs">
+              <div class="absolute -top-2.5 -left-2.5 w-6 h-6 rounded-full bg-purple-600 text-white font-mono font-black text-xs flex items-center justify-center badge-pin z-10">3</div>
+              <div class="p-2.5 bg-stone-50 border-b border-stone-100 flex justify-between items-center">
+                <span class="font-display font-black text-xs text-stone-900">Klaim Hadiah (3 Klaim Sah)</span>
+                <span class="px-2 py-0.5 bg-amber-50 text-amber-800 border border-amber-200 rounded-md text-[9px] font-black">Terdeduplikasi</span>
+              </div>
+              <div class="p-2 space-y-1.5 text-[10px]">
+                <div class="p-2 bg-stone-50 rounded-xl flex items-center justify-between">
+                  <div>
+                    <p class="font-bold text-stone-900">Favian Yusuf</p>
+                    <p class="text-[9px] text-stone-400">Scanner AI #1</p>
+                  </div>
+                  <span class="font-black text-emerald-600">+1,000 NP</span>
+                </div>
+                <div class="p-2 bg-stone-50 rounded-xl flex items-center justify-between">
+                  <div>
+                    <p class="font-bold text-stone-900">Favian Yusuf</p>
+                    <p class="text-[9px] text-stone-400">Pengumpul #1</p>
+                  </div>
+                  <span class="font-black text-emerald-600">+1,500 NP</span>
+                </div>
+                <div class="p-2 bg-stone-50 rounded-xl flex items-center justify-between">
+                  <div>
+                    <p class="font-bold text-stone-900">Favian Yusuf</p>
+                    <p class="text-[9px] text-stone-400">Si Paling Kuis #2</p>
+                  </div>
+                  <span class="font-black text-emerald-600">+500 NP</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-6 space-y-4">
+          <div class="bg-white rounded-3xl p-6 sm:p-7 border border-stone-200/80 shadow-xs">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="px-2.5 py-0.5 rounded-full bg-purple-100 text-purple-800 text-[10px] font-black uppercase tracking-wider">Slide 08 • Tata Kelola Tertinggi</span>
+              <span class="text-xs text-stone-400 font-bold">Super Admin</span>
+            </div>
+            <h2 class="text-2xl font-display font-black text-stone-900 tracking-tight">Super Admin Dashboard & Tata Kelola Skala Makro</h2>
+            <p class="text-xs text-stone-500 mt-1">Pusat kontrol menyeluruh untuk memverifikasi pendaftaran bank sampah mitra baru, menjaga stabilitas ekonomi poin, dan mengaudit transaksi fisik.</p>
+            <hr class="my-5 border-stone-100" />
+            <div class="space-y-3.5">
+              <div class="p-3.5 rounded-2xl bg-stone-50 border border-stone-200 flex items-start gap-3">
+                <span class="w-7 h-7 rounded-xl bg-purple-600 text-white font-mono font-black text-xs flex items-center justify-center shrink-0 mt-0.5">1</span>
+                <div>
+                  <h3 class="font-bold text-xs text-stone-900">Verifikasi Kredibilitas Mitra</h3>
+                  <p class="text-xs text-stone-600 mt-0.5 leading-relaxed">Memastikan hanya bank sampah dan UMKM yang memiliki legalitas dan lokasi fisik terverifikasi yang dapat mencairkan poin nasabah.</p>
+                </div>
+              </div>
+              <div class="p-3.5 rounded-2xl bg-stone-50 border border-stone-200 flex items-start gap-3">
+                <span class="w-7 h-7 rounded-xl bg-purple-600 text-white font-mono font-black text-xs flex items-center justify-center shrink-0 mt-0.5">2</span>
+                <div>
+                  <h3 class="font-bold text-xs text-stone-900">Audit Transparansi Klaim Hadiah Bebas Duplikasi</h3>
+                  <p class="text-xs text-stone-600 mt-0.5 leading-relaxed">Menampilkan riwayat klaim hadiah juara yang sah (persis 3 klaim milik Favian Yusuf) terpisah dari transaksi setoran sampah fisik, bebas dari broken image.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    lucide.createIcons();
+
+    let currentSlide = 1;
+    const totalSlides = 8;
+
+    function updateSlideView() {
+      for (let i = 1; i <= totalSlides; i++) {
+        const slideEl = document.getElementById('slide-view-' + i);
+        const pillEl = document.getElementById('pill-' + i);
+        if (slideEl) {
+          if (i === currentSlide) {
+            slideEl.classList.remove('hidden');
+          } else {
+            slideEl.classList.add('hidden');
+          }
+        }
+        if (pillEl) {
+          if (i === currentSlide) {
+            pillEl.className = "px-3.5 py-2 rounded-2xl bg-stone-900 text-white shadow-xs cursor-pointer whitespace-nowrap transition-all";
+          } else {
+            pillEl.className = "px-3.5 py-2 rounded-2xl bg-white text-stone-600 border border-stone-200 hover:bg-stone-50 cursor-pointer whitespace-nowrap transition-all";
+          }
+        }
+      }
+      document.getElementById('slide-indicator').innerText = `Slide ${currentSlide} / ${totalSlides}`;
+      lucide.createIcons();
+    }
+
+    function nextSlide() {
+      if (currentSlide < totalSlides) {
+        currentSlide++;
+      } else {
+        currentSlide = 1;
+      }
+      updateSlideView();
+    }
+
+    function prevSlide() {
+      if (currentSlide > 1) {
+        currentSlide--;
+      } else {
+        currentSlide = totalSlides;
+      }
+      updateSlideView();
+    }
+
+    function goToSlide(n) {
+      currentSlide = n;
+      updateSlideView();
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') nextSlide();
+      if (e.key === 'ArrowLeft') prevSlide();
+    });
+  </script>
+</body>
+</html>
